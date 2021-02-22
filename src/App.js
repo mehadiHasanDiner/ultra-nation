@@ -1,5 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import reactDom from 'react-dom';
+
+var style = {
+  color: "red",
+  backgroundColor:"yellow"
+}
 
 function App() {
   var person1 ={
@@ -21,8 +27,8 @@ function App() {
         </p>
         <h1>My heading</h1>
         <p>My first React Paragraph</p>
-        <h4>{person1.name +". "+ person1.age + ". Salary: " + person1.salary}</h4>
-        <p>{person2.name +". "+ person2.age + ". Salary: " + person2.salary}</p>
+        <h4 className="" style={style}>{person1.name +". "+ person1.age + ". Salary: " + person1.salary}</h4>
+        <p style ={{color:'green', background:'yellow', fontWeight:'bold'}}>{person2.name +". "+ person2.age + ". Salary: " + person2.salary}</p>
       </header>
     </div>
   );

@@ -9,6 +9,7 @@ var style = {
 
 function App() {
 
+  const naikoys = ['Manna', 'Anwar Hossain', 'Siam', 'Jafor Iqbal']
 
   return (
     <div className="App">
@@ -24,15 +25,16 @@ function App() {
 }
 
 function Person(props) {
-  // const personStyle = {
-  //   border: '2px solid red',
-  //   margin: '10px'
-  // } 
+  const personStyle = {
+    border: '2px solid red',
+    margin: '10px',
+    padding: '10px'
+  } 
   console.log(props);
   return (
-    <div style = {{border:'2px solid red', margin:'5px', padding:'5px'}}>
-      <h1>Name: {props.name}</h1>
-      <h3>Title: Hero of {props.naiyaka}</h3>
+    <div style ={personStyle}>
+      <h3>Name of the Nayok : {props.name}</h3>
+      <p>Naiyka of : {props.naiyaka}</p>
     </div>
   )
 

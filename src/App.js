@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import reactDom from 'react-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 var style = {
   color: "red",
@@ -22,44 +22,32 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>I am a react person</p>
-        <Count></Count>
+        <Users></Users>
 
       </header>
     </div>
   );
 }
 
-function Count() {
-  const [count, setCount] = useState(10);
-  const handleIncrease = () => setCount(count + 1);
 
-
+function Users() {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/comments')
+      .then(res => res.json())
+      .then(data => setUsers(data));
+  }, [])
   return (
     <div>
-      <h1>Count: {count}</h1>
-      <button onMouseMove={() => setCount(count - 1)}>Decrease</button>
-      <button onClick={() => setCount(count - 1)}>Decrease</button>
-      <button onClick={() => setCount(count + 1)}>Increase</button>
+      <h3>Dynamic User : {users.length}</h3>
+      <ul>
+        {
+          users.map(postId =><li style ={{textAlign:'left'}}>{postId.email}</li>)
+        }
+      </ul>
     </div>
   )
 }
-
-
-
-// function Count() {
-//   const [count, setCount] = useState(10);
-//   const handleIncrease = () => {
-//     const newCount = count + 1;
-//     setCount(newCount);
-//   };
-  
-//   return (
-//     <div>
-//       <h1>Count: {count}</h1>
-//       <button onClick={handleIncrease}>Increase</button>
-//     </div>
-//   )
-// }
 
 function Product(props) {
   const productStyle = {

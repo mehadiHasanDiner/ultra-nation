@@ -9,68 +9,62 @@ var style = {
 }
 
 function App() {
-
-  const products = [
-    { name: 'Photoshop', price: '$90.99' },
-    { name: 'Illustrator', price: '$60.99' },
-    { name: 'PDF Reader', price: '$6.99' },
-    { name: 'Adobe Primier', price: '$250.99' }
-  ]
-  const nayoks = ['Razzak', 'Bappi', 'Bappi', 'Shuvo', 'Sakib', 'Omor'];
-
+  const naikoys = ['Manna', 'Anwar Hossain', 'Siam', 'Jafor Iqbal'];
   return (
     <div className="App">
+      <MovieCounter></MovieCounter>
+      <Nayok name ={naikoys[0]} age = "56"></Nayok>
+      <Nayok name ={naikoys[1]}></Nayok>
+      <Nayok></Nayok>
+      <Nayok></Nayok>
+      <Nayok></Nayok>
+      <Nayok></Nayok>
+      <Nayok></Nayok>
       <header className="App-header">
         <p>I am a react person</p>
-        <Users></Users>
 
       </header>
     </div>
   );
 }
 
-
-function Users() {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/comments')
-      .then(res => res.json())
-      .then(data => setUsers(data));
-  }, [])
-  return (
+function MovieCounter(){
+  const [count, setCount] = useState(0);
+  const handleClick = () => setCount(count+1);
+  console.log(handleClick);
+  return(
     <div>
-      <h3>Dynamic User : {users.length}</h3>
-      <ul>
-        {
-          users.map(postId =><li style ={{textAlign:'left'}}>{postId.email}</li>)
-        }
-      </ul>
+      <button onClick={handleClick}>Add Movie</button>
+      <h3>Number of Movie : {count} </h3>
+      <MovieDisplay movies = {count}></MovieDisplay>
+      <MovieDisplay movies = {count+3}></MovieDisplay>
+      <MovieDisplay movies = {count+7}></MovieDisplay>
+      <MovieDisplay movies = {count+5}></MovieDisplay>
     </div>
   )
 }
 
-function Product(props) {
-  const productStyle = {
-    border: '1px solid gray',
-    borderRadius: '5px',
-    backgroundColor: 'lightpink',
-    height: '220px',
-    width: '250px',
-    float: 'left'
+function MovieDisplay(props){
+  return(
+    <div>
+      <h4>Movies I have acted : {props.movies} </h4>
+    </div>
+  )
+}
+
+function Nayok(props){
+  const nayokStyle ={
+    border:'2px solid gray',
+    borderRadius: '10px',
+    margin: '10px'
   }
-  // const {name, price} = props.product;
-  // const {name, price} = {name:'Photoshop', Price: '$90.99'};
-  const { name, price } = props.product;
-  console.log(props);
-  return (
-    <div style={productStyle}>
-      <h3>Name: {name}</h3>
-      <h5> Price: {price}</h5>
-      <button>Buy now</button>
+  return(
+    <div style={nayokStyle}>
+      <h1>Ami Nayok Hobo: {props.name}</h1>
+      <h3>I have done 5 movie : {props.age}</h3>
     </div>
+
   )
 }
-
-
 
 export default App;

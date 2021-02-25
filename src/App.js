@@ -9,7 +9,11 @@ function App() {
  useEffect(() =>{
   fetch('https://jsonplaceholder.typicode.com/albums')
   .then(res => res.json())
-  .then(data => setAlbum(data))
+  .then(data => {
+    let user = data.filter(x => x.userId > 9);
+    console.log(user);
+    setAlbum(user);
+  })
  }, [])
 
   return (

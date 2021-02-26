@@ -2,61 +2,36 @@ import logo from './logo.svg';
 import './App.css';
 import reactDom from 'react-dom';
 import { useEffect, useState } from 'react';
+import Country from './components/Country';
 
 function App() {
-const hero = [
-  {name:'Salman', age: 50, MovieAct: 110},
-  {name:'Sharukh', age: 55, MovieAct: 120},
-  {name:'Amir', age: 60, MovieAct: 150},
-  {name:'Ritick', age: 45, MovieAct: 90},
-]
+  const [countries, setCountries] = useState([]);
+  useEffect(() => { 
+    fetch('https://restcountries.eu/rest/v2/all')
+    .then(res => res.json())
+    .then(data => {
+      setCountries(data);
+      // console.log(data);
+      const names = data.map(country => country.name);
+      // console.log(names);
+    })
+    .catch(error => console.log(console.error));
+  }, [])
 
   return (
-    <div className="App">
-      <Movie></Movie>
+    <div className ="App">
+      <h3>Country Loaded : {countries.length}</h3>
       {
-      hero.map(heroName => <Hero name = {heroName.name} age = {heroName.age} act={heroName.MovieAct}></Hero>)
+        countries.map(country => <Country country ={country} key ={country.alpha3Code}></Country>)
+        
       }
-      <header className="App-header">
+
+      <header>
         <p>I am a react person</p>
 
       </header>
     </div>
   );
-}
-
-function MovieDisplay(props){
-  return <h3>Movie I have acted: {props.movie}</h3>
-}
-
-
-function Movie(){
-  const [count, setCount] = useState(0);
-  const handleClick = () => setCount(count+1);
-  return(
-    <div>
-      <button onClick={handleClick}> Movie Count</button>
-      <h3>Movie Acted: {count}</h3>
-      <MovieDisplay movie={count+3}></MovieDisplay>
-
-    </div>
-  )
-}
-
-function Hero(props) {
-  const nayokStyle = {
-    border: '2px solid gray',
-    borderRadius: '10px',
-    margin: '10px'
-  }
-  return (
-    <div style={nayokStyle}>
-      <h1>Hero Name: {props.name}</h1>
-      <h3>Hero Age : {props.age}</h3>
-      <p>Movie Acted Before : {props.act}</p>
-    </div>
-
-  )
 }
 
 export default App;
